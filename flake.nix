@@ -9,7 +9,7 @@
 
     glibcTarball = pkgs.fetchurl {
       url = "https://send.kanel.ovh/downloadFile?id=Xor3WQITqjZSDRz";
-      sha256 = "10bjcflifcvs2k3983rzqsg4r54lh9g2c1m8xwcxb80k16cwks7k";
+      sha256 = "sha256-mapVpZx+BZim0+Wy7cRnlBmuQTrU2R9Oh1lmItVIDlc=";
     };
 
     customGlibc = pkgs.stdenv.mkDerivation {
@@ -38,6 +38,10 @@
       };
     };
 
+	supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+			forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
+				pkgs = import nixpkgs { inherit system; };
+			});
   in {
     packages.x86_64-linux = {
       glibc = customGlibc;
@@ -57,5 +61,19 @@
         }
       ];
     };
-  };
+devShells = forEachSupportedSystem ({ pkgs }: {
+				default = pkgs.mkShell.override
+				{}
+				{
+					buildInputs = with pkgs;[
+
+					];
+					LD_LIBRARY_PATH=".";
+					hardeningDisable = [ "all" ];
+					packages = with pkgs; [
+							customGlibc
+							clang
+					];
+				};
+			});  };
 }
