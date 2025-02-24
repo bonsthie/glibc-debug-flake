@@ -8,7 +8,7 @@
     pkgs = import nixpkgs { system = "x86_64-linux"; };
 
     glibcTarball = pkgs.fetchurl {
-      url = "https://send.kanel.ovh/downloadFile?id=Xor3WQITqjZSDRz";
+      url = "https://send.kanel.ovh/downloadFile?id=J90dcZWrQiuon63";
       sha256 = "sha256-mapVpZx+BZim0+Wy7cRnlBmuQTrU2R9Oh1lmItVIDlc=";
     };
 
@@ -75,5 +75,6 @@ devShells = forEachSupportedSystem ({ pkgs }: {
 							clang
 					];
 				};
-			});  };
+			});
+};
 }
