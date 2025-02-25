@@ -8,7 +8,7 @@
     pkgs = import nixpkgs { system = "x86_64-linux"; };
 
     glibcTarball = pkgs.fetchurl {
-      url = "https://send.kanel.ovh/downloadFile?id=J90dcZWrQiuon63";
+      url = "https://send.kanel.ovh/downloadFile?id=eGpv1fqdpary1CP";
       sha256 = "sha256-mapVpZx+BZim0+Wy7cRnlBmuQTrU2R9Oh1lmItVIDlc=";
     };
 
